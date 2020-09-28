@@ -1,0 +1,381 @@
+:root {
+  --clr-primary: rgb(54, 112, 199);
+  --clr-light: #f4f4f4;
+  --clr-dark: #333;
+  --clr-warning: rgb(99, 36, 36);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  background-color: var(--background-color);
+  color: var(--color);
+  transition: background-color 1000ms linear;
+  transition: color 1000ms linear;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.todo__container {
+  width: 96%;
+  margin: auto;
+  .todo_header {
+    margin-top: 1rem;
+    position: relative;
+    h1 {
+      text-align: center;
+      font-size: calc(5vw + 2rem);
+      font-weight: 900;
+      color: var(--color-title);
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+  }
+  .todo__list {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    .todo__list-container {
+      background-color: var(--foreground-body-color);
+      --spacer: 2rem;
+      width: 50rem;
+      .todo__list-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--spacer);
+        background-color: var(--foreground-header-color);
+        h2 {
+          margin: 0 1em 0 0;
+          font-weight: 900;
+          font-size: 1.5rem;
+        }
+        p {
+          margin: 0;
+          font-size: 0.9rem;
+        }
+      }
+      .todo__list-body {
+        padding: var(--spacer);
+        position: relative;
+        text-align: left;
+
+        form {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          input {
+            background: transparent;
+            border: 0;
+            border-bottom-color: currentcolor;
+            border-bottom-style: none;
+            border-bottom-width: 0px;
+            color: inherit;
+            border-bottom: 1px solid currentColor;
+            font-size: inherit;
+            outline: none;
+            padding: 5px 5px 2px 5px;
+            transition: border-bottom 150ms ease-in;
+            order: 2;
+            &:focus {
+              border-bottom-width: 3px;
+            }
+          }
+          button {
+            font-size: 1.7rem;
+            font-weight: 900;
+            margin-right: 0.25em;
+            transition: opacity 250ms ease-in;
+            background: transparent;
+            cursor: pointer;
+            background: 0;
+            border: 0;
+            padding: 0;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.task label {
+  display: flex-inline;
+  align-items: center;
+  position: relative;
+}
+
+.task {
+  position: relative;
+  margin-bottom: 1.25em;
+}
+
+.task::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -0.5em;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.1;
+}
+
+.custom-checkbox {
+  --size: 0.75em;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  margin-right: var(--size);
+  cursor: pointer;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  transition: -webkit-transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
+}
+
+.task:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  color: var(--clr-primary);
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
+  box-shadow: inset 0 0 0px 2px white;
+}
+
+[type="checkbox"]:checked + label {
+  opacity: 0.5;
+}
+
+.task label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  left: 1.5em;
+  top: 50%;
+  height: 3px;
+  background: currentColor;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: right;
+  transform-origin: right;
+  transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+}
+
+[type="checkbox"]:checked + label::after {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transform-origin: left;
+  transform-origin: left;
+}
+
+.ant-notification {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  margin-right: 0px;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum", "tnum";
+  position: fixed;
+  z-index: 1010;
+  max-width: calc(100vw - 32px);
+  margin-right: 24px;
+
+  .ant-notification-notice {
+    padding: 16px 24px;
+    line-height: 1.5715;
+    position: relative;
+    width: 384px;
+    margin-bottom: 16px;
+    margin-left: auto;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+      0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+      0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .anticon {
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .ant-notification-notice-icon {
+    position: absolute;
+    margin-left: 4px;
+    font-size: 24px;
+    line-height: 24px;
+  }
+  .ant-notification-notice-icon-success {
+    color: #52c41a;
+  }
+
+  .ant-notification-notice-icon-error {
+    color: red;
+  }
+
+  .ant-notification-notice-message {
+    margin-bottom: 4px;
+    margin-left: 48px;
+    font-size: 16px;
+    padding-right: 24px;
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 24px;
+  }
+
+  .ant-notification-notice-description {
+    margin-left: 48px;
+    font-size: 14px;
+  }
+
+  .ant-notification-notice-close {
+    position: absolute;
+    top: 16px;
+    right: 22px;
+    color: rgba(0, 0, 0, 0.45);
+    outline: none;
+    color: #1890ff;
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+    -webkit-text-decoration-skip: objects;
+  }
+}
+
+// Slider
+// Credit : https://medium.com/@haxzie/dark-and-light-theme-switcher-using-css-variables-and-pure-javascript-zocada-dd0059d72fa2
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  left: 0px;
+  bottom: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  box-shadow: 0 0px 15px #2020203d;
+  background: white url("https://i.ibb.co/FxzBYR9/night.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+input:checked + .slider {
+  background-color: var(--color);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+  background: white url("https://i.ibb.co/7JfqXxB/sunny.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+// Refresh
+
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  font-weight: 900;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: #4691f6;
+}
+
+.svg-icon circle {
+  stroke: #4691f6;
+  stroke-width: 1;
+}
