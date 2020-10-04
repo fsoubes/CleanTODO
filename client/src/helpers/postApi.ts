@@ -27,7 +27,10 @@ export const addApi = async (
   route: string
 ): Promise<any> => {
   try {
-    const response = await axios.post(`/${route}`, todo);
+    const response = await axios.post(
+      process.env.DEV ? `localhost:4000/${route}` : `/${route}`,
+      todo
+    );
     const todoRes = response.data;
     showSuccess(
       todo.task ? "Todo successfully added!" : "Todo successfully updated!"
@@ -48,7 +51,10 @@ export const postApi = async (
   route: string
 ): Promise<void> => {
   try {
-    await axios.post(`/${route}`, todo);
+    await axios.post(
+      process.env.DEV ? `localhost:4000/${route}` : `/${route}`,
+      todo
+    );
 
     showSuccess(
       todo.task ? "Todo successfully added!" : "Todo successfully updated!"

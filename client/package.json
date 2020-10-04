@@ -20,7 +20,7 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "DEV=true react-scripts start",
     "build": "react-scripts build && cp -rf build/ ../server",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

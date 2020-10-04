@@ -8,6 +8,7 @@ import { postApi } from "../../../helpers/postApi";
 
 interface AchievedTasks {
   isAchieved?: React.Dispatch<UpdateDataAction>;
+  currentIdx?: number;
 }
 
 type TodoItemProps = TodoType & AchievedTasks;
@@ -16,10 +17,8 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   _id,
   task,
   completed,
-  createdAt,
-  time,
-  updatedAt,
   index,
+  currentIdx,
   isAchieved,
 }) => {
   const handleClick = async (): Promise<void> => {
@@ -27,7 +26,11 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       if (isCheck.current) {
         isAchieved({
           type: "editTodo",
-          update: { index: _id, edit: !isCheck.current.checked },
+          update: {
+            index: _id,
+            edit: !isCheck.current.checked,
+            id: currentIdx,
+          },
         });
         await postApi({ completed: !isCheck.current.checked }, `update/${_id}`);
       }

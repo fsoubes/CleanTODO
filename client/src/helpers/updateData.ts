@@ -7,6 +7,7 @@ export const todoReducer = (
   switch (action.type) {
     case "addTodo":
       return [...initialValues, action.todo];
+
     case "removeTodos":
       return initialValues.filter((item) => item.completed === false);
 

@@ -5,9 +5,14 @@ import { UpdateDataAction, TodoType } from "../../types/types";
 interface RefreshProps {
   tasks?: TodoType[];
   removeTasks?: React.Dispatch<UpdateDataAction>;
+  currentIdx: number;
 }
 
-export const Refresh: React.FC<RefreshProps> = ({ tasks, removeTasks }) => {
+export const Refresh: React.FC<RefreshProps> = ({
+  tasks,
+  removeTasks,
+  currentIdx,
+}) => {
   const handleClick = async (): Promise<void> => {
     try {
       const cleanTodos = tasks.reduce((acc: string[], item) => {
@@ -19,7 +24,7 @@ export const Refresh: React.FC<RefreshProps> = ({ tasks, removeTasks }) => {
 
       if (cleanTodos.length === 0) return null;
 
-      removeTasks({ type: "removeTodos" });
+      removeTasks({ type: "removeTodos", update: { id: currentIdx } });
       await postApi({ taskIds: cleanTodos }, "deleteTasks");
     } catch (err) {
       console.log(err);
@@ -29,21 +34,16 @@ export const Refresh: React.FC<RefreshProps> = ({ tasks, removeTasks }) => {
   return (
     <button
       style={{ display: "flex", alignItems: "center" }}
+      className="confirm__button"
       onClick={handleClick}
     >
-      <svg className="svg-icon" viewBox="0 0 20 20">
-        <path
-          fill="none"
-          d="M19.305,9.61c-0.235-0.235-0.615-0.235-0.85,0l-1.339,1.339c0.045-0.311,0.073-0.626,0.073-0.949
-            c0-3.812-3.09-6.901-6.901-6.901c-2.213,0-4.177,1.045-5.44,2.664l0.897,0.719c1.053-1.356,2.693-2.232,4.543-2.232
-            c3.176,0,5.751,2.574,5.751,5.751c0,0.342-0.037,0.675-0.095,1l-1.746-1.39c-0.234-0.235-0.614-0.235-0.849,0
-            c-0.235,0.235-0.235,0.615,0,0.85l2.823,2.25c0.122,0.121,0.282,0.177,0.441,0.172c0.159,0.005,0.32-0.051,0.44-0.172l2.25-2.25
-            C19.539,10.225,19.539,9.845,19.305,9.61z M10.288,15.752c-3.177,0-5.751-2.575-5.751-5.752c0-0.276,0.025-0.547,0.062-0.813
-            l1.203,1.203c0.235,0.234,0.615,0.234,0.85,0c0.234-0.235,0.234-0.615,0-0.85l-2.25-2.25C4.281,7.169,4.121,7.114,3.961,7.118
-            C3.802,7.114,3.642,7.169,3.52,7.291l-2.824,2.25c-0.234,0.235-0.234,0.615,0,0.85c0.235,0.234,0.615,0.234,0.85,0l1.957-1.559
-            C3.435,9.212,3.386,9.6,3.386,10c0,3.812,3.09,6.901,6.902,6.901c2.083,0,3.946-0.927,5.212-2.387l-0.898-0.719
-            C13.547,14.992,12.008,15.752,10.288,15.752z"
-        ></path>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path d="M20.944 12.979c-.489 4.509-4.306 8.021-8.944 8.021-2.698 0-5.112-1.194-6.763-3.075l1.245-1.633c1.283 1.645 3.276 2.708 5.518 2.708 3.526 0 6.444-2.624 6.923-6.021h-2.923l4-5.25 4 5.25h-3.056zm-15.864-1.979c.487-3.387 3.4-6 6.92-6 2.237 0 4.228 1.059 5.51 2.698l1.244-1.632c-1.65-1.876-4.061-3.066-6.754-3.066-4.632 0-8.443 3.501-8.941 8h-3.059l4 5.25 4-5.25h-2.92z" />
       </svg>
     </button>
   );

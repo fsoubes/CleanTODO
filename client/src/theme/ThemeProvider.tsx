@@ -7,8 +7,10 @@ const themeColours = {
     backgroundColor: "#010A16",
     foregroundHeaderColor: "#0b1622",
     foregroundBodyColor: "#151f2e",
+    colorArrow: "#0b1622",
   },
   light: {
+    colorArrow: "#c9c9c9",
     color: "#343434",
     backgroundColor: "#f0f0f0",
     foregroundBodyColor: "white",
@@ -58,9 +60,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       themeColours[name].colorTitle
     );
     document.body.style.setProperty(
-      "--color-title",
-      themeColours[name].colorTitle
+      "--color-arrow",
+      themeColours[name].colorArrow
     );
+
     setThemeName(name);
   };
 

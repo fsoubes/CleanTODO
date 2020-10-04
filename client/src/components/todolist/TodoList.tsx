@@ -7,17 +7,22 @@ import { UpdateDataAction, TodoType } from "../../types/types";
 import { TodoItem } from "./TodoItem/TodoItem";
 
 interface TodoListProps {
-  data: TodoType[];
   editTask: React.Dispatch<UpdateDataAction>;
   todos: TodoType[];
+  currentIdx: number;
 }
 
-export const TodoList: React.FC<TodoListProps> = ({ editTask, todos }) => {
+export const TodoList: React.FC<TodoListProps> = ({
+  editTask,
+  todos,
+  currentIdx,
+}) => {
   const todoList = todos.map((item, index) => {
     return (
       <TodoItem
         _id={item._id}
         index={index + 1}
+        currentIdx={currentIdx}
         completed={item.completed}
         task={item.task}
         key={item._id}
